@@ -1,0 +1,36 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class RzutKostka {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        
+        while (true) {
+            int rzutKostka = random.nextInt(6) + 1; // Symulacja rzutu kostką (losowanie od 1 do 6)
+            
+            System.out.print("Odgadnij wynik rzutu kostką (1-6): ");
+            int odgadnijWynik = scanner.nextInt();
+            
+            if (odgadnijWynik >= 1 && odgadnijWynik <= 6) {
+                if (odgadnijWynik == rzutKostka) {
+                    System.out.println("Brawo! Odgadłeś wynik rzutu kostką.");
+                } else {
+                    System.out.println("Nie udało się. Wynik rzutu kostką to: " + rzutKostka);
+                }
+            } else {
+                System.out.println("Podaj liczbę od 1 do 6.");
+            }
+            
+            System.out.print("Czy chcesz rzucić kostką ponownie? (tak/nie): ");
+            String odpowiedz = scanner.next();
+            
+            if (!odpowiedz.equalsIgnoreCase("tak")) {
+                break; // Zakończ program, jeśli użytkownik nie chce rzucić kostką ponownie
+            }
+        }
+        
+        System.out.println("Dziękujemy za grę!");
+        scanner.close();
+    }
+}
