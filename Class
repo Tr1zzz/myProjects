@@ -1,0 +1,58 @@
+import java.util.Random;
+import java.util.Scanner;
+
+class Mode {
+    public static int chooseMode(Scanner scanner) {
+        System.out.print("Wybierz tryb gry (0 - komputer, 1 - człowiek): ");
+        return scanner.nextInt();
+    }
+
+    public static int chooseTarget(Scanner scanner, int mode) {
+        if (mode == 0) {
+            return new Random().nextInt(6) + 1; // Komputer wybiera losową liczbę
+        } else {
+            System.out.print("Podaj liczbę do odgadnięcia (1-6): ");
+            return scanner.nextInt();
+        }
+    }
+}
+
+public class RzutKostka {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            int tryb = Mode.chooseMode(scanner);
+
+            if (tryb != 0 && tryb != 1) {
+                System.out.println("Niepoprawny tryb. Proszę wybierz 0 lub 1.");
+                continue;
+            }
+
+            int cel = Mode.chooseTarget(scanner, tryb);
+
+            if (cel < 1 || cel > 6) {
+                System.out.println("Proszę podać liczbę od 1 do 6.");
+                continue;
+            }
+
+            int rzutKostka = new Random().nextInt(6) + 1; // Symulacja rzutu kostką (losowanie od 1 do 6)
+
+            if (cel == rzutKostka) {
+                System.out.println("Gratulacje! Odgadłeś wynik rzutu kostką.");
+            } else {
+                System.out.println("Niestety, wynik rzutu kostką to: " + rzutKostka);
+            }
+
+            System.out.print("Czy chcesz rzucić kostką jeszcze raz? (tak/nie): ");
+            String odpowiedz = scanner.next();
+
+            if (!odpowiedz.equalsIgnoreCase("tak")) {
+                break; // Zakończ program, jeśli użytkownik nie chce rzucić kostką ponownie
+            }
+        }
+
+        System.out.println("Dziękujemy za grę!");
+        scanner.close();
+    }
+}
